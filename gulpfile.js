@@ -40,7 +40,7 @@ gulp.task('minifyjs', function(){
 gulp.task('packagejs', function(){
     // myblog
     gulp.src(paths.dist.minified + '/js/*.js')
-        .pipe(concat('myblog.js'))
+        .pipe(concat('plugins.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.dist.packaged + '/js'));
 });
@@ -58,7 +58,7 @@ gulp.task('minifycss', function(){
 gulp.task('packagecss', function(){
     // 合并css   
     gulp.src(paths.dist.minified + '/css/*.css')
-        .pipe(concat('myblog.css'))
+        .pipe(concat('plugins.css'))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.dist.packaged + '/css'));
 });
