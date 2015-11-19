@@ -14,13 +14,15 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     jshint = require('gulp-jshint'),
     livereload = require('gulp-livereload'),
-    notify = require('gulp-notify')
+    notify = require('gulp-notify'),
+	path = require('path')
 ;
 
 // 配置文件路径
 var paths = {
     dist: {
-        minified: 'dist/compressed',
+        minified: 'dist/minified',
+		uncompressed: 'dist/uncompressed',
         packaged: 'dist/',
     },
 };
@@ -40,11 +42,25 @@ gulp.task('minifyjs', function(){
 gulp.task('packagejs', function(){
     // plugins
     gulp.src([
-		paths.dist.minified + '/js/zepto/*.js', //先后顺序 不兼容问题 先压缩
+		paths.dist.minified + '/js/zepto/*.js',  //先后顺序 不兼容问题 先压缩
 		paths.dist.minified + '/js/*.js'
 	]) 
 		//paths.dist.minified + '/js/*.js')  全部
         .pipe(concat('plugins.js'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest(paths.dist.packaged + '/js'));
+		
+		
+	// main
+    gulp.src([
+		paths.dist.minified + '/js/zepto/zepto.js',  //先后顺序 不兼容问题 先压缩
+		paths.dist.minified + '/js/touch.js',
+		paths.dist.minified + '/js/PageSlider.js',
+		paths.dist.minified + '/js/PxLoader.js',
+		paths.dist.minified + '/js/PxLoaderImage.js',
+		paths.dist.minified + '/js/index.js']) 
+		//paths.dist.minified + '/js/*.js')  全部
+        .pipe(concat('main.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.dist.packaged + '/js'));
 });
