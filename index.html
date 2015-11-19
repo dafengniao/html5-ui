@@ -7,6 +7,150 @@
 		<meta name="format-detection" content="telephone=no"/>
 		<script src="./dist/js/plugins.min.js"></script>
 		<style type="text/css">
+        .loading{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #070709;
+        }
+
+        .loading__inner{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -26px;
+            margin-top: -16px;
+            width: 52px;
+            height: 32px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            background-color: #070709;
+        }
+        .loading-num{
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 100%;
+            text-align: center;
+        }
+		
+	  /**** 横屏 ****/
+	  @-webkit-keyframes rotation {
+        10% {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg)
+        }
+        50%, 60% {
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg)
+        }
+        90% {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg)
+        }
+        100% {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg)
+        }
+    }
+
+    @keyframes rotation {
+        10% {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg)
+        }
+        50%, 60% {
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg)
+        }
+        90% {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg)
+        }
+        100% {
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg)
+        }
+    }
+
+    #orientLayer {
+        display: none;
+    }
+
+    @media screen and (min-aspect-ratio: 13/8) {
+        #orientLayer {
+            display: block;
+        }
+    }
+
+    .mod-orient-layer {
+        display: none;
+        position: absolute !important;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: #000;
+        z-index: 9997;
+	overflow:hidden !important;
+    }
+
+    .mod-orient-layer__content {
+        position: absolute;
+        width: 100%;
+        top: 45%;
+        margin-top: -35px !important;
+        text-align: center
+    }
+
+    .mod-orient-layer__icon-orient {
+        background-image: url(http://frstatic.qiniudn.com/images/promo/hengping.png);
+        display: inline-block;
+        width: 34px !important;
+        height: 55px !important;
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -webkit-animation: rotation infinite 1.5s ease-in-out;
+        animation: rotation infinite 1.5s ease-in-out;
+        -webkit-background-size: 34px;
+        background-size: 34px !important;
+    }
+
+    .mod-orient-layer__desc {
+        margin-top: 10px !important;
+        font-size: 9px !important;
+        color: #fff
+    }
+    .music.playing{
+  		-webkit-animation: 2.3s spin linear infinite;
+  		animation: 2.3s spin linear infinite;
+  	}
+  	@-webkit-keyframes spin {
+  	    0% {
+  	        -webkit-transform: rotateZ(0deg);
+  	    }
+
+  	    100% {
+  	        -webkit-transform: rotateZ(360deg);
+  	    }
+  	}
+    .music {
+        position: fixed;
+        background: url(http://frstatic.qiniudn.com/images/promo/music_bg.png) 0 0 no-repeat;
+        z-index: 999;
+        width: 1.5rem;
+        height: 1.5rem;
+        right: 0.4rem;
+        top: 0.4rem;
+        background-size: 100% auto;
+    }
+    .music.stop {
+        background-position: 0 -1.5rem;
+    }
+		
 		*{
             margin: 0;
             padding: 0;
@@ -25,29 +169,36 @@
             overflow: hidden;
         }
 		.wrap{
-		            width: 100%;
-		            height: 100%;
-		        }
+            width: 100%;
+            height: 100%;
+        }
 		.page{
-		            width: 100%;
-		            height: 100%;
-		            -webkit-backface-visibility: hidden;
-		            -webkit-perspective: 1000;
-		        }
-				
-		        .page-1{
-		            background: green;
-		        }
-		        .page-2{
-		            background: blue;
-		        }
-		        .page-3{
-		            background: red;
-		        }
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
+        }
+		
+        .page-1{
+            background: green;
+        }
+        .page-2{
+            background: blue;
+        }
+        .page-3{
+            background: red;
+        }
 			
 		</style>
 		</head>
 		<body>
+	    <div class="loading">
+	        <div class="loading__inner">
+	            <div class="loading__img"></div>
+	            <div class="loading-num">0%</div>
+	        </div>
+	    </div>
+			
 		<div class="wrap">
 		    <div class="page page-1">
 		        <div class="title">page one</div>
@@ -71,9 +222,56 @@
 		    </div>
 		</div>
 		
+		<div id="orientLayer" class="mod-orient-layer">
+		    <div class="mod-orient-layer__content"><i class="icon mod-orient-layer__icon-orient"></i>
+		        <div class="mod-orient-layer__desc">为了更好的体验，请使用竖屏浏览</div>
+		    </div>
+		</div>
+		<div class="music playing" style="display:none;"></div>
+		<audio id="app_bgm" src="http://frstatic.qiniudn.com/wechat/js/bigger.mp3" loop="true" autoplay></audio>
 		<script>
-	    new PageSlider({
-	        pages: $('.wrap .page')
+		
+	    var basePath = "http://frstatic.qiniudn.com/images/promo/coin/";
+	    if (!(typeof webpsupport == 'function')) {
+	        var webpsupport = function (cb) {
+	            cb();
+	        }
+	    }
+	    webpsupport(function (webpa) {
+	    var loader = new PxLoader(),
+	     fileList =[
+			'bj.png','p1_04.png','p1_05.png','p1_25.png','p1_3.png','p1_22.png','p1_21.png','p_1.png','p1_2.png','p1_11.png','P1_15.png','P1_16.png','p1_17.png','p1_18.png','p1_19.png','p1_20.png','P1_13.png','P1_14.png','p1_06.png','p1_07.png','p1_08.png','p1_09.png','logo.png','p2-2.png','p2_1.png','p2_3.png','p2_4.png','p2_5.png','p2_6.png','p2_7.png','p2_8.png','p2_9.png','p2_10.png','p2_11.png','p2_12.png','p2_13.png','p2_14.png','p2_t01.png','p2_t02.png','p2_t03.png','p2_t04.png','p2_t005.png','p2_t06.png','p2_t07.png','p2_t08.png','p2_t9.png','p3_c1.png','p3_l1.png','p3_l2.png','n1.png','n1a.png','n2.png','n2a.png','n3.png','n3a.png','n4.png','n4a.png','n5.png','n5a.png','n6.png','n6a.png','n15.png','n15a.png','n8.png','n8a.png','n9.png','n9a.png','n10.png','n10a.png','n11.png','n11a.png','n12.png','n12a.png','n13.png','n13a.png','n14.png','n14a.png','n16.png','n16a.png','p3_c2.png','p3_z1.png','p3_z2.png','p3_z3.png','p3_z4.png','p4_t1.png','p4_t2.png','p4_t03.png','p4_t04.png','p4_t5.png','p4_t6.png','p4_t7.png','p4_1.png','p4_2.png','p4_3.png','p4_4.png','p4_5.png','p4_01.png','p4_02.png','p4_03.png','p4_04.png','p4_05.png','p4_06.png','p4_07.png','p4_08.png','p4_09.png','p4_10.png','p4_11.png','p4_12.png','p4_13.png','p4_14.png','p5_1.png','p5_2.png','p5_3.png','p5_4.png','p5_5.png','p5_6.png','p5_l01.png','p5_l02.png','p5_t1.png','p5_t02.png','p5_t3.png','p5_00l1.png','p5_00l2.png','p5_00l3.png','p5_00l4.png','p5_00l5.png','p5_00l6.png','p5_00l7.png','p5_00l8.png','p5_00l9.png','p6_bg.png','p6_1.png','p6_l1.png','p6_l2.png','p6_logo.png','p6_t1.png','p6_t02.png','p6_t3.png','p6_t04.png','p6_t05.png','p6_t06.png','p6_t7.png','p6_t8.png'
+		];
+     
+	     for (var i = 0; i < fileList.length; i++) {
+	         var basename = fileList[i].substring(fileList[i].lastIndexOf('/') + 1);
+
+	         if (webpa && img_map && (basename in img_map) && img_map[basename]) { //if webp
+	             var path = fileList[i].replace(/\.\w+/, '.webp');
+	         } else {
+	             var path = fileList[i];
+	         }
+	         $('#app_bgm').get(0).pause();
+	         loader.addImage(basePath + path);
+	     }
+
+	     loader.addCompletionListener(function () {
+	         $('.loading').remove();
+	         $('.page').eq(0).addClass('current');
+	         $('.wrap').show();
+	         $('#app_bgm').get(0).play();
+	         $('.music').show();
+	     });
+
+	     //loading 进度监听
+	     loader.addProgressListener(function (e) {
+	         var percentUp = Math.round((e.completedCount / e.totalCount) * 100), //正序, 1-100
+	             progressDown = 100 - percentUp;      
+	         $('.loading-num').text(percentUp + '%');
+	     });
+
+	     //启动
+	     loader.start();
 	    });
 		
 		</script>
