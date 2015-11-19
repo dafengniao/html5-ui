@@ -86,7 +86,7 @@
 
     .mod-orient-layer {
         display: none;
-        position: absolute !important;
+        position: fixed;
         height: 100%;
         width: 100%;
         left: 0;
@@ -95,33 +95,32 @@
         bottom: 0;
         background: #000;
         z-index: 9997;
-	overflow:hidden !important;
     }
 
     .mod-orient-layer__content {
         position: absolute;
         width: 100%;
         top: 45%;
-        margin-top: -35px !important;
+        margin-top: -75px;
         text-align: center
     }
 
     .mod-orient-layer__icon-orient {
         background-image: url(http://frstatic.qiniudn.com/images/promo/hengping.png);
         display: inline-block;
-        width: 34px !important;
-        height: 55px !important;
+        width: 67px;
+        height: 109px;
         transform: rotate(90deg);
         -webkit-transform: rotate(90deg);
         -webkit-animation: rotation infinite 1.5s ease-in-out;
         animation: rotation infinite 1.5s ease-in-out;
-        -webkit-background-size: 34px;
-        background-size: 34px !important;
+        -webkit-background-size: 67px;
+        background-size: 67px;
     }
 
     .mod-orient-layer__desc {
-        margin-top: 10px !important;
-        font-size: 9px !important;
+        margin-top: 20px;
+        font-size: 15px;
         color: #fff
     }
     .music.playing{
