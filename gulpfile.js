@@ -9,13 +9,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     del = require('del'),
     copy = require('gulp-copy'),
-    cache = require('gulp-cache'),
-    autoprefixer = require('gulp-autoprefixer'),
-    imagemin = require('gulp-imagemin'),
-    jshint = require('gulp-jshint'),
-    livereload = require('gulp-livereload'),
-    notify = require('gulp-notify'),
-	path = require('path')
+    path = require('path')
 ;
 
 // 配置文件路径
@@ -38,31 +32,32 @@ gulp.task('minifyjs', function(){
             .pipe(gulp.dest(paths.dist.minified + '/js'));
 });
 
+
 // 合并,压缩js
 gulp.task('packagejs', function(){
-    // plugins
+    
+    // jquery plugins
     gulp.src([
-		paths.dist.minified + '/js/zepto/*.js',  //先后顺序 不兼容问题 先压缩
-		paths.dist.minified + '/js/*.js'
-	]) 
-		//paths.dist.minified + '/js/*.js')  全部
+		paths.dist.minified + '/js/zepto/zepto.min.min.js', //   合并 dist/js/ 里 文件
+		paths.dist.minified + '/js/touch.min.js',
+		paths.dist.minified + '/js/PageSlider.min.js',
+		paths.dist.minified + '/js/PxLoader.min.js',
+		paths.dist.minified + '/js/PxLoaderImage.min.js',
+		paths.dist.minified + '/js/index.min.js'
+        ])
         .pipe(concat('plugins.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.dist.packaged + '/js'));
-		
-		
-	// main
+    
+    // main
     gulp.src([
-		paths.dist.minified + '/js/zepto/zepto.js',  //先后顺序 不兼容问题 先压缩
-		paths.dist.minified + '/js/touch.js',
-		paths.dist.minified + '/js/PageSlider.js',
-		paths.dist.minified + '/js/PxLoader.js',
-		paths.dist.minified + '/js/PxLoaderImage.js',
-		paths.dist.minified + '/js/index.js']) 
-		//paths.dist.minified + '/js/*.js')  全部
+		paths.dist.minified + '/js/zepto/*.js',  //先后顺序 不兼容问题 先压缩
+		paths.dist.minified + '/js/*.js'
+    ])
         .pipe(concat('main.js'))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest(paths.dist.packaged + '/js'));
+		.pipe(gulp.dest(paths.dist.packaged + '/js'));
+    
 });
 
 // 压缩css
@@ -102,7 +97,7 @@ gulp.task('clean', function(cb){
 
 // 设置默认任务
 gulp.task('default', ['clean'], function(){
-    gulp.start('comprass');
+    gulp.start('minifycss','minifyjs');
 });
 
 // 监听事件
