@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head lang="zh-CN">
+		<meta charset="UTF-8">
+    	<meta name="apple-mobile-web-app-capable" content="yes">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="format-detection" content="telephone=no"/>
+		<script src="./dist/js/plugins.min.js"></script>
+		<style type="text/css">
+		*{
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            -webkit-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -webkit-overflow-scrolling: touch;
+            -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+            -webkit-backface-visibility:hidden;
+            -webkit-perspective:1000;
+            overflow: hidden;
+        }
+		.wrap{
+		            width: 100%;
+		            height: 100%;
+		        }
+		.page{
+		            width: 100%;
+		            height: 100%;
+		            -webkit-backface-visibility: hidden;
+		            -webkit-perspective: 1000;
+		        }
+				
+		        .page-1{
+		            background: green;
+		        }
+		        .page-2{
+		            background: blue;
+		        }
+		        .page-3{
+		            background: red;
+		        }
+			
+		</style>
+		</head>
+		<body>
+		<div class="wrap">
+		    <div class="page page-1">
+		        <div class="title">page one</div>
+		        <div class="subtitle">page one subtitle</div>
+		        <div class="arrow"></div>
+		    </div>
+
+		    <div class="page page-2">
+		        <div class="title">page two</div>
+		        <div class="subtitle">page two subtitle</div>
+		        <div class="arrow"></div>
+		    </div>
+		    <div class="page page-3">
+		        <div class="title">page three</div>
+		        <div class="subtitle">page three subtitle</div>
+		        <div class="arrow"></div>
+		    </div>
+		    <div class="page page-1">
+		        <div class="title">page four</div>
+		        <div class="subtitle">page four subtitle</div>
+		    </div>
+		</div>
+		
+		<script>
+	    new PageSlider({
+	        pages: $('.wrap .page')
+	    });
+		
+		</script>
+	</body>
+</html>		
+		

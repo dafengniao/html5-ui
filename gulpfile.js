@@ -38,8 +38,12 @@ gulp.task('minifyjs', function(){
 
 // 合并,压缩js
 gulp.task('packagejs', function(){
-    // myblog
-    gulp.src(paths.dist.minified + '/js/*.js')
+    // plugins
+    gulp.src([
+		paths.dist.minified + '/js/zepto/*.js', //先后顺序 不兼容问题 先压缩
+		paths.dist.minified + '/js/*.js'
+	]) 
+		//paths.dist.minified + '/js/*.js')  全部
         .pipe(concat('plugins.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.dist.packaged + '/js'));
