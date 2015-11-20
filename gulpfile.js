@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     minifyCSS = require('gulp-minify-css'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
+	clean = require('gulp-clean'),
     
     rename = require('gulp-rename'),
     del = require('del'),
@@ -91,13 +92,14 @@ gulp.task('comprass', ['minifycss', 'minifyjs'], function(){
 });
 
 // 清理旧文件
-gulp.task('clean', function(cb){
-    del(['dist'], cb); 
+gulp.task('clean', function () {
+    return gulp.src('dist', {read: false})
+        .pipe(clean());
 });
 
 // 设置默认任务
 gulp.task('default', ['clean'], function(){
-    gulp.start('minifycss','minifyjs');
+    gulp.start('comprass');
 });
 
 // 监听事件
