@@ -29,7 +29,7 @@ $ npm install --save-dev gulp (局部安装)
 ####安装这些插件需要运行如下命令
 
 ```bash
-$ (sudo) npm install gulp-less gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-copy gulp-livereload gulp-cache del --save-dev
+$ (sudo) npm install gulp-less gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-copy gulp-livereload gulp-cache gulp-clean --save-dev
 ```
 
 说明
@@ -45,7 +45,7 @@ $ (sudo) npm install gulp-less gulp-autoprefixer gulp-minify-css gulp-jshint gul
 * gulp-copy 复制文件
 * gulp-livereload 自动刷新页面
 * gulp-cache 图片缓存，只有图片替换了才压缩
-* del
+* gulp-clean 删除文件
 
 备注
 * npm是安装node模块的工具，执行install命令
