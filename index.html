@@ -5,7 +5,8 @@
     	<meta name="apple-mobile-web-app-capable" content="yes">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta name="format-detection" content="telephone=no"/>
-		<script src="./dist/js/plugins.min.js"></script>
+		<script src="http://frstatic.qiniudn.com/wechat/js/plugins.min.js"></script>
+	    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 		<style type="text/css">
         .loading{
             position: relative;
@@ -228,8 +229,68 @@
 		</div>
 		<div class="music playing" style="display:none;"></div>
 		<audio id="app_bgm" src="http://frstatic.qiniudn.com/wechat/js/bigger.mp3" loop="true" autoplay></audio>
-		<script>
 		
+	  	<script type="text/javascript" >
+	      var m_name = '2015京东众筹BIGGER大会';
+	      var img_url = 'http://frstatic.qiniudn.com/images/promo/jd-share2.jpg';
+	      var link = '{{ app_url_wap_promo }}/jd';
+	      var desc_str = '京东众筹大举进军生活美学领域，诚邀各位设计师、合作伙伴参加。';
+
+	      wx.config({
+	          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	          appId: 'wxa6e5c6ac4ab1b807', // 必填，公众号的唯一标识
+	          //timestamp: {{ timestamp }}, // 必填，生成签名的时间戳
+	          //nonceStr: '{{ wxnonceStr }}', // 必填，生成签名的随机串
+	          //signature: '{{ wxSha1 }}',// 必填，签名，见附录1
+	          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'hideMenuItems'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	      });
+		  wx.ready(function(){
+		    // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+		     wx.onMenuShareAppMessage({
+		      title: m_name,
+		      desc: desc_str,
+		      link: link,
+		      imgUrl: img_url,
+		      /*success: function (res) {
+		        record_share_num();
+		      }*/
+		    });      
+
+		    // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+		    wx.onMenuShareTimeline({
+		      title: m_name,
+		      desc: desc_str,
+		      link: link,
+		      imgUrl: img_url,
+		      /*success: function (res) {
+		        record_share_num();
+		      }*/
+		    });
+
+		    // 2.3 监听“分享到QQ”按钮点击、自定义分享内容及分享结果接口
+		    wx.onMenuShareQQ({
+		      title: m_name,
+		      desc: desc_str,
+		      link: link,
+		      imgUrl: img_url,
+		      /*success: function (res) {
+		        record_share_num();
+		      }*/
+		    });
+
+		    // 2.4 监听“分享到微博”按钮点击、自定义分享内容及分享结果接口
+		    wx.onMenuShareWeibo({
+		      title: m_name,
+		      desc: desc_str,
+		      link: link,
+		      imgUrl: img_url,
+		      /*success: function (res) {
+		        record_share_num();
+		      }*/
+		    });
+		  });
+		  
+		  
 	    var basePath = "http://frstatic.qiniudn.com/images/promo/coin/";
 	    if (!(typeof webpsupport == 'function')) {
 	        var webpsupport = function (cb) {

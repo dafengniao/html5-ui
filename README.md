@@ -299,6 +299,17 @@ new PageSlider({
 
 
 
+# 微信分享
+
+<a href="http://1.openh5.sinaapp.com/" target="_blank">http://1.openh5.sinaapp.com/</a>
+
+#### jssdk.php
+#### index.php
+
+
+
+
+
 
 
 
