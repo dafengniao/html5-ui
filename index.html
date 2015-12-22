@@ -5,7 +5,7 @@
     	<meta name="apple-mobile-web-app-capable" content="yes">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta name="format-detection" content="telephone=no"/>
-		<script src="http://frstatic.qiniudn.com/wechat/js/plugins.min.js"></script>
+		<script src="dist/js/plugins.min.js"></script>
 	    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 		<style type="text/css">
         .loading{
@@ -188,7 +188,47 @@
         .page-3{
             background: red;
         }
-			
+		.title.active{
+			color:#f36;
+		}
+		.arrow{
+		    position: absolute;
+		    left: 50%;
+		    bottom: 10px;
+		    width: 33px;
+		    height: 18px;
+		    margin-left: -16px;
+			background:url(http://frstatic.qiniudn.com/images/swipe.png);
+		}	
+		
+		@-webkit-keyframes fadeOutUp {
+			0% {
+				opacity: 1
+			}
+
+			100% {
+				opacity: 0;
+				-webkit-transform: translate3d(0,-100%,0);
+				transform: translate3d(0,-100%,0)
+			}
+		}
+
+		@keyframes fadeOutUp {
+			0% {
+				opacity: 1
+			}
+
+			100% {
+				opacity: 0;
+				-webkit-transform: translate3d(0,-100%,0);
+				-ms-transform: translate3d(0,-100%,0);
+				transform: translate3d(0,-100%,0)
+			}
+		}
+		.question.hide{
+			animation: fadeOutUp 1s cubic-bezier(0.73, 0.31, 0.18, 0.71) 0.5s forwards;
+			-webkit-animation: fadeOutUp 1s cubic-bezier(0.73, 0.31, 0.18, 0.71) 0.5s forwards;
+		}
 		</style>
 		</head>
 		<body>
@@ -198,28 +238,32 @@
 	            <div class="loading-num">0%</div>
 	        </div>
 	    </div>
-			
+		
 		<div class="wrap">
-		    <div class="page page-1">
-		        <div class="title">page one</div>
-		        <div class="subtitle">page one subtitle</div>
-		        <div class="arrow"></div>
+		    <div class="page page-1" data-lock-next="true" data-lock-prev="true">
+		        <div class="title" name="a" date="1">page one</div>
+		        <div class="subtitle title" name="b" date="1">page one subtitle</div>
+		        <div class="arrow nextbtn"></div>
+				<input type="hidden" name="daan_1" no="0" value="">	
 		    </div>
 
-		    <div class="page page-2">
-		        <div class="title">page two</div>
-		        <div class="subtitle">page two subtitle</div>
-		        <div class="arrow"></div>
+		    <div class="page page-2" data-lock-next="true" data-lock-prev="true">
+		        <div class="title" name="a" date="2">page two</div>
+		        <div class="subtitle title" name="b" date="2">page two subtitle</div>
+		        <div class="arrow nextbtn"></div>
+				<input type="hidden" name="daan_2" no="0" value="">	
 		    </div>
-		    <div class="page page-3">
-		        <div class="title">page three</div>
-		        <div class="subtitle">page three subtitle</div>
-		        <div class="arrow"></div>
+		    <div class="page page-3 page-12" data-lock-next="true" data-lock-prev="true">
+		        <div class="title" name="a" date="3">page three</div>
+		        <div class="subtitle title" name="b" date="3">page three subtitle</div>
+		        <div class="arrow nextbtn"></div>
+				<input type="hidden" name="daan_3" no="0" value="">	
 		    </div>
-		    <div class="page page-1">
-		        <div class="title">page four</div>
-		        <div class="subtitle">page four subtitle</div>
-		    </div>
+		    <!--<div class="page page-1" data-lock-next="true" data-lock-prev="true">
+		        <div class="title" name="a" date="4">page four</div>
+		        <div class="subtitle title" name="b" date="4">page four subtitle</div>
+				<input type="hidden" name="daan_4" no="0" value="">	
+		    </div>-->
 		</div>
 		
 		<div id="orientLayer" class="mod-orient-layer">
@@ -300,7 +344,7 @@
 	    webpsupport(function (webpa) {
 	    var loader = new PxLoader(),
 	     fileList =[
-			'bj.png','p1_04.png','p1_05.png','p1_25.png','p1_3.png','p1_22.png','p1_21.png','p_1.png','p1_2.png','p1_11.png','P1_15.png','P1_16.png','p1_17.png','p1_18.png','p1_19.png','p1_20.png','P1_13.png','P1_14.png','p1_06.png','p1_07.png','p1_08.png','p1_09.png','logo.png','p2-2.png','p2_1.png','p2_3.png','p2_4.png','p2_5.png','p2_6.png','p2_7.png','p2_8.png','p2_9.png','p2_10.png','p2_11.png','p2_12.png','p2_13.png','p2_14.png','p2_t01.png','p2_t02.png','p2_t03.png','p2_t04.png','p2_t005.png','p2_t06.png','p2_t07.png','p2_t08.png','p2_t9.png','p3_c1.png','p3_l1.png','p3_l2.png','n1.png','n1a.png','n2.png','n2a.png','n3.png','n3a.png','n4.png','n4a.png','n5.png','n5a.png','n6.png','n6a.png','n15.png','n15a.png','n8.png','n8a.png','n9.png','n9a.png','n10.png','n10a.png','n11.png','n11a.png','n12.png','n12a.png','n13.png','n13a.png','n14.png','n14a.png','n16.png','n16a.png','p3_c2.png','p3_z1.png','p3_z2.png','p3_z3.png','p3_z4.png','p4_t1.png','p4_t2.png','p4_t03.png','p4_t04.png','p4_t5.png','p4_t6.png','p4_t7.png','p4_1.png','p4_2.png','p4_3.png','p4_4.png','p4_5.png','p4_01.png','p4_02.png','p4_03.png','p4_04.png','p4_05.png','p4_06.png','p4_07.png','p4_08.png','p4_09.png','p4_10.png','p4_11.png','p4_12.png','p4_13.png','p4_14.png','p5_1.png','p5_2.png','p5_3.png','p5_4.png','p5_5.png','p5_6.png','p5_l01.png','p5_l02.png','p5_t1.png','p5_t02.png','p5_t3.png','p5_00l1.png','p5_00l2.png','p5_00l3.png','p5_00l4.png','p5_00l5.png','p5_00l6.png','p5_00l7.png','p5_00l8.png','p5_00l9.png','p6_bg.png','p6_1.png','p6_l1.png','p6_l2.png','p6_logo.png','p6_t1.png','p6_t02.png','p6_t3.png','p6_t04.png','p6_t05.png','p6_t06.png','p6_t7.png','p6_t8.png'
+			/*'bj.png','p1_04.png','p1_05.png','p1_25.png','p1_3.png','p1_22.png','p1_21.png','p_1.png','p1_2.png','p1_11.png','P1_15.png','P1_16.png','p1_17.png','p1_18.png','p1_19.png','p1_20.png','P1_13.png','P1_14.png','p1_06.png','p1_07.png','p1_08.png','p1_09.png','logo.png','p2-2.png','p2_1.png','p2_3.png','p2_4.png','p2_5.png','p2_6.png','p2_7.png','p2_8.png','p2_9.png','p2_10.png','p2_11.png','p2_12.png','p2_13.png','p2_14.png','p2_t01.png','p2_t02.png','p2_t03.png','p2_t04.png','p2_t005.png','p2_t06.png','p2_t07.png','p2_t08.png','p2_t9.png','p3_c1.png','p3_l1.png','p3_l2.png','n1.png','n1a.png','n2.png','n2a.png','n3.png','n3a.png','n4.png','n4a.png','n5.png','n5a.png','n6.png','n6a.png','n15.png','n15a.png','n8.png','n8a.png','n9.png','n9a.png','n10.png','n10a.png','n11.png','n11a.png','n12.png','n12a.png','n13.png','n13a.png','n14.png','n14a.png','n16.png','n16a.png','p3_c2.png','p3_z1.png','p3_z2.png','p3_z3.png','p3_z4.png','p4_t1.png','p4_t2.png','p4_t03.png','p4_t04.png','p4_t5.png','p4_t6.png','p4_t7.png','p4_1.png','p4_2.png','p4_3.png','p4_4.png','p4_5.png','p4_01.png','p4_02.png','p4_03.png','p4_04.png','p4_05.png','p4_06.png','p4_07.png','p4_08.png',*/'p4_09.png','p4_10.png','p4_11.png','p4_12.png','p4_13.png','p4_14.png','p5_1.png','p5_2.png','p5_3.png','p5_4.png','p5_5.png','p5_6.png','p5_l01.png','p5_l02.png','p5_t1.png','p5_t02.png','p5_t3.png','p5_00l1.png','p5_00l2.png','p5_00l3.png','p5_00l4.png','p5_00l5.png','p5_00l6.png','p5_00l7.png','p5_00l8.png','p5_00l9.png','p6_bg.png','p6_1.png','p6_l1.png','p6_l2.png','p6_logo.png','p6_t1.png','p6_t02.png','p6_t3.png','p6_t04.png','p6_t05.png','p6_t06.png','p6_t7.png','p6_t8.png'
 		];
      
 	     for (var i = 0; i < fileList.length; i++) {
@@ -333,6 +377,84 @@
 	     //启动
 	     loader.start();
 	    });
+		
+		$(document).ready(function(){
+			$('.music').click(function(){
+				if($(this).hasClass("playing")){
+				  $('#app_bgm').get(0).pause();
+					$(this).removeClass("playing").addClass('stop');
+				}
+				else{
+					$(this).addClass("playing").removeClass('stop');
+					$('#app_bgm').get(0).play();
+				}
+			});
+		});
+		var PageSlider = new PageSlider({
+		    pages: $('.wrap .page')
+		});
+		$('.title').on('tap',function(){
+
+			var tishu = $(this).attr('date');
+			var daan = $(this).attr('name');
+			var question = answer(tishu,daan);
+			$(this).addClass('active').attr('name');
+			$(this).siblings().removeClass('active');
+			$('input[name=daan_'+tishu+']').val(daan).attr('no',question);
+			
+			//var leng = $('input[no="1"]');
+			//if (leng.length >= 1){
+			//	alert( leng.length );
+			//}
+			
+			//alert( $('input[name=daan_'+tishu+']').val() );
+			//alert($('input[name=daan_'+tishu+']').attr('no'));
+		})
+	    $('.nextbtn').on('tap', function(){
+			if( ! $('.current input').val()==""){
+				PageSlider.next();
+			}
+			if ( !$('input[name=daan_3]').val()=="" ){
+				var leng = $('input[no="1"]').length;
+			}
+			if ( leng >= 2){
+				$('.page-12').addClass('question hide');
+				$('').show;
+			}
+	    });
+		
+		/*$('.page-12 .nextbtn').on('tap',function(){
+			
+			if ( !$('input[name=daan_3]').val()=="" ){
+				var leng = $('input[no="1"]').length;
+			}
+			if ( leng >= 2){
+				$('.page-12').addClass('question hide');
+				$('').show;
+			}
+		})*/
+		function answer(tishu ,daan){
+			var wrong=0;
+			switch(parseInt(tishu)){
+				case 1:
+					if(daan == "a") {wrong = 1;}
+					break;
+				case 2:
+					if(daan == "a") wrong = 1;
+					break;
+				case 3:
+					if(daan == "a") wrong = 1;
+					break;
+				case 4:
+					if(daan == "a") wrong = 1;
+					break;
+			}
+			return wrong;
+		}
+		
+		
+		
+		
 		
 		</script>
 	</body>

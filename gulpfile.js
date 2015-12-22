@@ -44,7 +44,7 @@ gulp.task('packagejs', function(){
 		paths.dist.minified + '/js/PageSlider.min.js',
 		paths.dist.minified + '/js/PxLoader.min.js',
 		paths.dist.minified + '/js/PxLoaderImage.min.js',
-		paths.dist.minified + '/js/index.min.js'
+		//paths.dist.minified + '/js/index.min.js'
         ])
         .pipe(concat('plugins.js'))
         .pipe(rename({suffix: '.min'}))

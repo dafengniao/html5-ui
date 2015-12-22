@@ -9,7 +9,4 @@ $(document).ready(function(){
 			$('#app_bgm').get(0).play();
 		}
 	});
-	new PageSlider({
-	    pages: $('.wrap .page')
-	});
 })
