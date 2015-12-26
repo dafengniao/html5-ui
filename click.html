@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head lang="zh-CN">
+		<meta charset="UTF-8">
+    	<meta name="apple-mobile-web-app-capable" content="yes">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="format-detection" content="telephone=no"/>
+		<style type="text/css">
+		
+		
+		</style>
+		
+	</head>
+	<body>
+		
+		<label><input type="radio" class="one" name="1" > 第一个</label>
+		<label><input type="radio" class="two" name="1" >第二个</label>
+		<label><input type="radio" class="three" name="1">第三个</label>
+		
+		<button type="button">Click Me!</button>
+	</body>
+	<script type="text/javascript" src="jquery-2.1.0.js"></script>
+	<script type="text/javascript" >
+	$('.one').click(function(){
+		$(this).attr('state', Math.floor(Math.random()*5+1));
+		//$(this).siblings('input').attr('state','');
+		$('.two,.three').attr('state','');
+		//alert($(this).attr('state'));
+	});
+	$('.two').click(function(){
+		$(this).attr('state', Math.floor(Math.random()*5+6));
+		//$(this).siblings('input').attr('state','');
+		$('.one,.three').attr('state','');
+	});
+	$('.three').click(function(){
+		$(this).attr('state', Math.floor(Math.random()*5+11));
+		//$(this).siblings('input').attr('state','');
+		$('.one,.two').attr('state','');
+	});
+	
+	
+	$('button').click(function(){
+		alert($('input:checked').attr('state'));
+	})
+		
+	
+	
+	</script>
+</html>

@@ -17,8 +17,6 @@
 	            width: 100%;
 	            height: 100%;
 				background:#fff2c4;
-				user-select:none;
-				-webkit-user-select:none;
 	        }
 			.page {
 			    width: 100%;
@@ -1060,6 +1058,18 @@
 			.da7-2.active{
 				background:url('da7-2ttt.png');
 			}
+			
+			p{
+				width: 74%;
+			    position: absolute;
+			    bottom: 10%;
+			    left: 13%;
+				font-size:16px;
+				line-height:18px;
+			    font-weight: inherit;
+			    font-style: inherit;
+			    font-family: Microsoft yahei,Helvetica,Arial
+			}
 		</style>
 	</head>
 	<body>
@@ -1265,6 +1275,7 @@
 		</div>
 		
 		<img src=" " class="ping" style="display:none;">
+		<p style="display:none;">复制这条信息 ￥AABzRigN￥🔑淘口令 🔑 在手机淘宝上打开</p>
 		
 		<div id="orientLayer" class="mod-orient-layer">
 		  <div class="mod-orient-layer__content"><i class="icon mod-orient-layer__icon-orient"></i>
@@ -1356,7 +1367,7 @@
 	  		});*/
 	  		var PageSlider = new PageSlider({
 	  		    pages: $('.wrap .page'),
-				dev: 6
+				dev: 8
 	  		});
 			//选择身份
 			$('.tabon').on('tap',function(){
@@ -1415,7 +1426,7 @@
 				
 				if ( leng >= 0 && leng <= 2 && shenfen == 1){
 					$('.page-10').addClass('question hide');
-					$('img.ping').css("display","block");
+					$('img.ping ,p').css("display","block");
 					$('img.ping').attr('src','1lm.jpg');
 					$('html,body,.wrap').css('background','rgba(0,0,0,0)');
 				}
@@ -1441,8 +1452,8 @@
 				}
 				if ( leng >= 0 && leng <= 2 && shenfen == 0){
 					$('.page-10').addClass('question hide');
-					$('img.ping').css("display","block");
-					$('img.ping').attr('src','1nb.jpg');
+					$('img.ping,p').css("display","block");
+					$('img.ping').attr('src','01nb.jpg');
 				}
 				if ( leng >= 3 && leng <= 4 && shenfen == 0){
 					$('.page-10').addClass('question hide');
